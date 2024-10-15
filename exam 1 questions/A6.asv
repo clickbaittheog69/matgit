@@ -1,0 +1,15 @@
+clc;  clear;
+n = 0;
+sum = 0;
+newsum = 0;
+while n <= 4
+    %beginning
+    
+    newsum = newsum + 1;
+    sum = sum + newsum; %summation
+    for ii:newsum
+        com = mod(sum, ii);
+        if com == 1
+    
+
+end

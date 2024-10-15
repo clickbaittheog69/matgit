@@ -1,0 +1,58 @@
+clc; clear;
+terms = input('Enter the number of terms: ');
+for ii = terms:-1:1
+    A(ii) = input('Enter the nth term starting from A0: ');
+end
+%A3 is A(1) or An
+%A0 is A(terms)
+%A3 = input('Enter A3: ');
+%A2 = input('Enter A2: ');
+%A1 = input('Enter A1: ');
+%A0 = input('Enter A0: ');
+
+Anabs = abs(A(1));
+A0abs = abs(A(terms));
+y = 0;
+
+for ii = 1:A0abs
+    comp = mod(A(terms), ii);
+    if comp == 0 %p checker
+        p = ii;
+    else
+        continue
+    end
+    for jj = 1:Anabs
+        comq=mod(A(1), jj);
+        if comq == 0 %q checker
+            q = jj;
+        else
+            continue
+        end
+        x = (p/q); %positive x condition %ADD SYM IN A LITTLE
+        for kk = terms-1:-1:0
+            y = A(kk)*(x^kk) + y;
+        end
+        % y = A3*(x^3)+A2*(x^2)+A1*(x)+A0;
+        if y == 0
+            if floor(x) == ceil(x)
+                % fprintf('%g is a root\n',x)
+                fprintf('(x - %g)', x)
+            else
+                fprintf('(%gx - %g)',q, p)
+            end
+        end
+        x = x*(-1); %makes x negative
+        % y = A3*(x^3)+A2*(x^2)+A1*(x)+A0;
+        for kk = 1:terms
+            y = A(kk)*(x^kk) + y;
+        end
+        if y == 0
+            if floor(x) == ceil(x)
+                %fprintf('%g is a root\n',x)
+                fprintf('(x + %g)', p/q)
+            else
+                fprintf('(%gx + %g)',q, p)
+            end
+        end
+    end
+end
