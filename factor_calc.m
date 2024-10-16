@@ -1,26 +1,9 @@
-%find a way to disregard p and q if it is not fully simplified i.e. 4/2
-%dont compute if 2/1 already exists
-        
-
-%idea 1: as i iterate, create a list of already checked terms. if any new x
-%matches anywhere on that list, try the next term
-%problem: i would need to create an ever-expanding array/cell/matrix and
-%search through it. not great.also idk how to search and match
-
-%idea 2: check for simplification. if it can be simplified, i probably
-%already checked it. skip it. 
-%problem: x = sym(p/q) returns an already simplified version. no good way
-%to check.
-
-%also this shit doesn't work if you have a 0. anywhere. x^2 + 1 straight up
-%doesn't work.
-
- clear;
+clc; clear;
 terms = input('Enter the number of terms: ');
 A = zeros(1,terms);
 
-simux = zeros(1,100);
-c = 1;
+ballschecker = zeros(1,100);
+c = 0;
 
 
 
@@ -50,13 +33,9 @@ for ii = 1:A0abs
 
         x = sym(p/q); %positive x condition
         
-        %duplicate checker 
-        for qq = 1:c
-            qqqq = sym(simux(qq));
-            if qqqq == x
-                fprintf('duplicate spotted! offender noted.')
-            end
-        end
+        %x condition adder
+        c = c+1;
+        ballschecker(c) = x;
 
         %polynomial summation
         pp = 1;
@@ -70,12 +49,12 @@ for ii = 1:A0abs
         if y == 0 
             if floor(x) == ceil(x)
                 fprintf('(x - %g)', x)
-                simux(c) = x;
+                ballschecker(c) = x;
                 c = c+1;
 
             else
                 fprintf('(%gx - %g)',q, p)
-                simux(c) = x;
+                ballschecker(c) = x;
                 c = c+1;
             end
         end
@@ -89,11 +68,11 @@ for ii = 1:A0abs
         if y == 0 
             if floor(x) == ceil(x)
                 fprintf('(x + %g)', p/q)
-                simux(c) = x;
+                ballschecker(c) = x;
                 c = c+1;
             else
                 fprintf('(%gx + %g)',q, p)
-                simux(c) = x;
+                ballschecker(c) = x;
                 c = c+1;
             end
         end
