@@ -32,50 +32,58 @@ for ii = 1:A0abs
         end
 
         x = sym(p/q); %positive x condition
+
+        %condition checker
+        ismatch = find(ballschecker == sym(x));
+        if ismatch == 0 
+
+            %x condition adder
+            c = c+1;
+            ballschecker(c) = x;
+
+            %polynomial summation
+            pp = 1;
+            y = 0;
+                    for kk = terms:-1:1 %for y
+                        y = A(pp)*(x^(kk-1)) + y;
+                        pp = pp+1;
+                    end
+
+
+                    if y == 0
+                                if floor(x) == ceil(x)
+                                    fprintf('(x - %g)', x)
+                                    ballschecker(c) = x;
+                                    c = c+1;
+                
+                                else
+                                    fprintf('(%gx - %g)',q, p)
+                                    ballschecker(c) = x;
+                                    c = c+1;
+                                end
+                    end
+            x = x*(-1); %makes x negative
+            pp = 1;
+            y=0;
+                    for kk = terms:-1:1 %for x
+                        y = A(pp)*(x^(kk-1)) + y;
+                        pp = pp+1;
+                    end
+                    if y == 0
+                                if floor(x) == ceil(x)
+                                    fprintf('(x + %g)', p/q)
+                                    ballschecker(c) = x;
+                                    c = c+1;
+                                else
+                                    fprintf('(%gx + %g)',q, p)
+                                    ballschecker(c) = x;
+                                    c = c+1;
+                                end
+                    end
+        else
+            continuem
+        end
         
-        %x condition adder
-        c = c+1;
-        ballschecker(c) = x;
-
-        %polynomial summation
-        pp = 1;
-        y = 0;        
-        for kk = terms:-1:1 %for y 
-            y = A(pp)*(x^(kk-1)) + y;
-            pp = pp+1;
-        end
-
-
-        if y == 0 
-            if floor(x) == ceil(x)
-                fprintf('(x - %g)', x)
-                ballschecker(c) = x;
-                c = c+1;
-
-            else
-                fprintf('(%gx - %g)',q, p)
-                ballschecker(c) = x;
-                c = c+1;
-            end
-        end
-        x = x*(-1); %makes x negative
-        pp = 1;
-        y=0;
-        for kk = terms:-1:1 %for x
-            y = A(pp)*(x^(kk-1)) + y;
-            pp = pp+1;
-        end
-        if y == 0 
-            if floor(x) == ceil(x)
-                fprintf('(x + %g)', p/q)
-                ballschecker(c) = x;
-                c = c+1;
-            else
-                fprintf('(%gx + %g)',q, p)
-                ballschecker(c) = x;
-                c = c+1;
-            end
-        end
     end
 end
 
