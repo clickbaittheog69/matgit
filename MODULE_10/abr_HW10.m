@@ -54,3 +54,5 @@ for y = imgh:-1:(imgh/2)+1
     ballschecker = ballschecker + 1;
 end
 imwrite(crtcimg, imgname)
+fprintf('Corrected image saved to %s', imgname);
+imshow(crtcimg)
