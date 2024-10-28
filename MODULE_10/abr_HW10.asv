@@ -1,15 +1,15 @@
 clc; clear;
 imgname = input('Enter image name: ', 's');
-% img = imread('Alpha_Puzzle.png');
-img = imread(imgname);
-crtcimg = uint8(zeros(size(img)));
-imgh = height(img);
-imgw = width(img);
-imgname = replace(imgname, pattern('Puzzle'), "Fixed");
+img = imread('Alpha_Puzzle.png');
+% imgname = imread(imgname);
+crtcimg = uint8(zeros(size(imgname)));
+imgh = height(imgname);
+imgw = width(imgname);
 
-img(:,:,1)= img(:,:,1) * 3;
-img(:,:,2)= 0;
-img(:,:,3)= img(:,:,3) * 3;
+
+imgname(:,:,1)= imgname(:,:,1) * 3;
+imgname(:,:,2)= 0;
+imgname(:,:,3)= imgname(:,:,3) * 3;
 
 for y = 1:imgh
     for x = 1:imgw
@@ -17,19 +17,19 @@ for y = 1:imgh
             newrow = y/2;
             if x <= imgw/2
                 newcol = (imgw/2) +(1-x);
-                crtcimg(newrow, newcol, :) = img(y, x, :);
+                crtcimg(newrow, newcol, :) = imgname(y, x, :);
             else
                 newcol = 3*imgw/2+(1-x);
-                crtcimg(newrow, newcol, :)= img(y, x, :);
+                crtcimg(newrow, newcol, :)= imgname(y, x, :);
             end
         elseif mod(y,2) == 1 %if odd
             newrow = (y+1)/2+imgh/2;
             if x <= imgw/2
                 newcol = (imgw/2) +(1-x);
-                crtcimg(newrow, newcol, :)= img(y, x, :);
+                crtcimg(newrow, newcol, :)= imgname(y, x, :);
             else
                 newcol = 3*imgw/2+(1-x);
-                crtcimg(newrow, newcol, :)= img(y,x,:);
+                crtcimg(newrow, newcol, :)= imgname(y,x,:);
             end
         end
     end
@@ -53,4 +53,5 @@ for y = imgh:-1:(imgh/2)+1
     crtcimg(y, xstart:xend, :) = crtcimg2(ballschecker, xstart:xend, :);
     ballschecker = ballschecker + 1;
 end
-imwrite(crtcimg, imgname)
+imshow(crtcimg)
+saveas(crtcimg, )

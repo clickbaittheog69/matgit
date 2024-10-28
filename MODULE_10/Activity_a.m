@@ -15,5 +15,4 @@ flipped = uint8(zeros(h, w));
 flipped = pic(h:-1:1, w:-1:1, :);
 
 % show flipped image
-
- imshow(flipped);
+imshow(flipped);
