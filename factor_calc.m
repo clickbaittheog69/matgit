@@ -2,8 +2,8 @@ clc; clear;
 terms = input('Enter the number of terms: ');
 A = zeros(1,terms);
 
-ballschecker = zeros(1,100);
-c = 0;
+ballschecker = [];
+c = 1;
 
 
 
@@ -21,6 +21,7 @@ for ii = 1:A0abs
     if comp == 0 %p checker
         p = ii;
     else
+        
         continue
     end
     for jj = 1:Anabs
@@ -34,12 +35,7 @@ for ii = 1:A0abs
         x = sym(p/q); %positive x condition
 
         %condition checker
-        ismatch = find(ballschecker == sym(x));
-        if ismatch == 0 
-
-            %x condition adder
-            c = c+1;
-            ballschecker(c) = x;
+        
 
             %polynomial summation
             pp = 1;
@@ -53,13 +49,13 @@ for ii = 1:A0abs
                     if y == 0
                                 if floor(x) == ceil(x)
                                     fprintf('(x - %g)', x)
-                                    ballschecker(c) = x;
-                                    c = c+1;
+                                    % ballschecker(c) = x;
+                                    % c = c+1;
                 
                                 else
                                     fprintf('(%gx - %g)',q, p)
-                                    ballschecker(c) = x;
-                                    c = c+1;
+                                    % ballschecker(c) = x;
+                                    % c = c+1;
                                 end
                     end
             x = x*(-1); %makes x negative
@@ -72,18 +68,14 @@ for ii = 1:A0abs
                     if y == 0
                                 if floor(x) == ceil(x)
                                     fprintf('(x + %g)', p/q)
-                                    ballschecker(c) = x;
-                                    c = c+1;
+                                    % ballschecker(c) = x;
+                                    % c = c+1;
                                 else
                                     fprintf('(%gx + %g)',q, p)
-                                    ballschecker(c) = x;
-                                    c = c+1;
+                                    % ballschecker(c) = x;
+                                    % c = c+1;
                                 end
                     end
-        else
-            continuem
-        end
-        
     end
 end
 
