@@ -1,0 +1,72 @@
+clc; clear;
+
+% filename = input('Enter filename: ', 's');
+boardpng = imread('Screenshot_Foxtrot.png');
+imshow(boardpng);
+board = zeros(4,4);
+topleft = zeros(1,2);
+botright = zeros(1,2);
+
+[h,w,c] = size(boardpng);
+%ydiff = 42 from top left
+%xdiff = 57 from top left
+%xjump = 122 from first square
+%yjump = 122 from first square
+%ogy = 125
+%ogx = 975
+
+
+
+for ii = h:-1:1
+    for jj = 1:w
+        if boardpng(ii,jj, 1) == 250 && boardpng(ii,jj,2) == 248 && boardpng(ii,jj,3) == 239
+            topleft(1) = ii;
+            topleft(2) = jj;
+            break
+        end
+    end
+end
+
+for ii = 1:h
+    for jj = w:-1:1
+        if boardpng(ii,jj, 1) == 250 && boardpng(ii,jj,2) == 248 && boardpng(ii,jj,3) == 239
+            botright(1) = ii;
+            botright(2) = jj;
+            break
+        end
+    end
+end
+
+topleft(1) = topleft(1) + 42;
+topleft(2) = topleft(2) + 57;
+ogx = topleft(2);
+for column = 1:4
+    for row = 1:4
+        if boardpng(topleft(1), topleft(2), 1) == 205 && boardpng(topleft(1), topleft(2), 2) == 193 && boardpng(topleft(1), topleft(2), 3) == 180
+            board(column,row) = 0;
+        elseif boardpng(topleft(1), topleft(2), 1) == 238 && boardpng(topleft(1), topleft(2), 2) == 228 && boardpng(topleft(1), topleft(2), 3) == 218
+            board(column,row) = 2;
+        elseif boardpng(topleft(1), topleft(2), 1) == 237 && boardpng(topleft(1), topleft(2), 2) == 224 && boardpng(topleft(1), topleft(2), 3) == 200
+            board(column,row) = 4;
+            elseif boardpng(topleft(1), topleft(2), 1) == 242 && boardpng(topleft(1), topleft(2), 2) == 177 && boardpng(topleft(1), topleft(2), 3) == 121
+            board(column,row) = 8;
+            elseif boardpng(topleft(1), topleft(2), 1) == 245 && boardpng(topleft(1), topleft(2), 2) == 149 && boardpng(topleft(1), topleft(2), 3) == 99
+            board(column,row) = 16;
+            elseif boardpng(topleft(1), topleft(2), 1) == 246 && boardpng(topleft(1), topleft(2), 2) == 124 && boardpng(topleft(1), topleft(2), 3) == 95
+            board(column,row) = 32;
+            % elseif boardpng(topleft(1), topleft(2), 1) == 242 && boardpng(topleft(1), topleft(2), 2) == 177 && boardpng(topleft(1), topleft(2), 3) == 121
+            % board(column,row) = 8;
+            elseif boardpng(topleft(1), topleft(2), 1) == 237 && boardpng(topleft(1), topleft(2), 2) == 207 && boardpng(topleft(1), topleft(2), 3) == 114
+            board(column,row) = 128;
+            elseif boardpng(topleft(1), topleft(2), 1) == 237 && boardpng(topleft(1), topleft(2), 2) == 204 && boardpng(topleft(1), topleft(2), 3) == 97
+            board(column,row) = 256;
+            elseif boardpng(topleft(1), topleft(2), 1) == 237 && boardpng(topleft(1), topleft(2), 2) == 200 && boardpng(topleft(1), topleft(2), 3) == 97
+            board(column,row) = 512;
+        end
+        topleft(2) = topleft(2) + 122;
+    end
+    topleft(1) = topleft(1) + 122;
+    topleft(2) = ogx;
+end
+
+disp(board);
