@@ -1,15 +1,16 @@
-clc; clear;
+function [new_board,score] = MakeMove(board, direction)
+score = 0;
 
 %lines 22 - 104 is for prealigning the tiles
 %lines 110 - 171 is for calculating the game state
 %lines 177 - end is for re-aligning the tiles to final game state
 
 
-board = [2 2 2 2;2 2 2 2;2 2 2 2;2 2 2 2]; %test board
-fprintf('Original\n') %can comment as i included this for test purposes
-disp(board)
+% board = [4 0 0 0;16 4 2 2;32 16 4 4;64 32 8 4]; %test board
+% fprintf('Original\n') %can comment as i included this for test purposes
+% disp(board)
 
-direction = input('was yo move?: ', 's');
+% direction = input('was yo move?: ', 's');
 x = 1;
 y = 1;
 %x and y is what we use to compare
@@ -100,8 +101,8 @@ if strcmp(direction, 'down')
         y = 4;
     end
 end
-fprintf('Aligned\n')
-disp(board);
+% fprintf('Aligned\n')
+% disp(board);
 %prints the aligned board, for testing purposes
 
 %this does the actual calculation. I used the same x and y variables, but
@@ -114,6 +115,7 @@ if strcmp(direction, 'left')
         for jj = 2:4
             if board(y, x) == board(ii, jj) && board(y, x) ~= 0 && board(ii,jj) ~= 0 %If two squares are equal and are not zero
                 board(y,x) = board(y,x)*2;
+                score = score + board(y,x);
                 board(ii,jj) = 0;
             end
             x = x+1;
@@ -129,6 +131,7 @@ if strcmp(direction, 'right')
         for jj = 3:-1:1
             if board(y, x) == board(ii, jj) && board(y, x) ~= 0 && board(ii,jj) ~= 0
                 board(y,x) = board(y,x)*2;
+                score = score + board(y,x);
                 board(ii,jj) = 0;
             end
             x = x-1;
@@ -144,6 +147,7 @@ if strcmp(direction, 'up')
         for jj = 2:4
             if board(y, x) == board(jj, ii) && board(y, x) ~= 0 && board(jj,ii) ~= 0
                 board(y,x) = board(y,x)*2;
+                score = score + board(y,x);
                 board(jj,ii) = 0;
             end
             y = y+1;
@@ -159,6 +163,7 @@ if strcmp(direction, 'down')
         for jj = 3:-1:1
             if board(y, x) == board(jj, ii) && board(y, x) ~= 0 && board(jj,ii) ~= 0
                 board(y,x) = board(y,x)*2;
+                score = score + board(y,x);
                 board(jj,ii) = 0;
             end
             y = y-1;
@@ -167,13 +172,14 @@ if strcmp(direction, 'down')
         x = x+1;
     end
 end
-fprintf('New Unaligned Board\n')
-disp(board);
+% % fprintf('New Unaligned Board\n')
+% disp(board);
 %end of move board. added disp(board) for test purposes
 
 %i noticed that sometimes there is a space between tiles which is not how
 %the game works. I copied the beginning part of the code over again to
-%realign the tiles
+%realign the tiles. im sure there's a way to do this within the if and else
+%loops but i just ctrl c ctrl v'd that baby.
 if strcmp(direction, 'left') 
     x = 1;
     y = 1;
@@ -260,8 +266,10 @@ if strcmp(direction, 'down')
         y = 4;
     end
 end
-fprintf('Final Game state\n')
-disp(board);
+% fprintf('Final Game state\n')
+% disp(board);
 
 %i could have use nested if and elseif loops to save lines but for ease of
 %reading and debugging i kept all the lines separate
+new_board = board;
+end

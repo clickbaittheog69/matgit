@@ -1,16 +1,24 @@
 clc; clear;
-board = [2 4 8 16;32 64 128 256;512 1028 2048 2;2 2 2 2];
+
+name = input('Enter the name of the image: ', 's');
+board_game1 = AnalyzeScreenshot(name);
+disp(board_game1);
+direction = input('Enter up, down, left, right: ', 's');
+[board, b] = MakeMove(board_game1,direction);
+fprintf('The score is %g! \n', b);
+
+% board = [2 4 8 16;32 64 128 256;512 1028 2048 2;2 2 2 2];
 filename1 = ('Screenshot_Charlie.png'); %includes numbers 2 thru 64
 filename2 = ('Screenshot_Foxtrot.png'); %includes numbers 128 thru 512
 filename3 = ('Screenshot_Golf.png'); %1028
 filename4 = ('Screenshot_Hotel.png'); %2048
 
-board1 = imread(filename1) ;
+board1 = imread(filename1);
 board2 = imread(filename2);
 board3 = imread(filename3);
 board4 = imread(filename4);
 %creates images of each number so they look pretty and i dont have to do
-%work
+%individually save more images of pngs
 two = uint8(board1(500:606,321:427,:));
 four = uint8(board1(621:727,321:427,:));
 eight = uint8(board1(742:848,321:427,:));
@@ -73,7 +81,7 @@ pix(485:end,:,2) = 173;
 pix(485:end,:,3) = 160;
 % end of checkerboard pattern
 
-imshow(pix)
+% imshow(pix)
 x = 15;
 y = 15; 
 %i wrote this from the top left corners down basically it works fine

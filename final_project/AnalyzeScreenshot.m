@@ -1,12 +1,12 @@
-function [board] = Analyze_Screenshot(boardpng)
+function [board] = AnalyzeScreenshot(boardpng)
 
 % filename = input('Enter filename: ', 's');
-% boardpng = imread('Screenshot_Bravo.png');
+boardpng = imread(boardpng);
 % imshow(boardpng);
 board = zeros(4,4);
 topleft = zeros(1,2);
 
-[h,w,c] = size(boardpng);
+[h,w,~] = size(boardpng);
 %ydiff = 42 from top left
 %xdiff = 57 from top left
 %xjump = 122 from first square
@@ -23,7 +23,6 @@ for ii = h:-1:1 %checks from top left going right and down to see where the actu
         end
     end
 end
-
 
 topleft(1) = topleft(1) + 42;
 %value somewhat randomly chosen from the very top left of the game window to land near inside corner of
