@@ -1,5 +1,5 @@
 clc; clear;
-board = [2 2 2 2;2 2 2 2;2 2 2 2;2 2 2 2];
+board = [2 4 8 16;32 64 128 256;512 1028 2048 2;2 2 2 2];
 filename1 = ('Screenshot_Charlie.png'); %includes numbers 2 thru 64
 filename2 = ('Screenshot_Foxtrot.png'); %includes numbers 128 thru 512
 filename3 = ('Screenshot_Golf.png'); %1028
@@ -30,6 +30,7 @@ pix(:,:,3) = 180;
 %14 pixel thick borders
 %i could have done a for loop but this was easier than just doing the math,
 %sue me
+%this is for the horizontal lines
 pix(:,1:14,1) = 187;
 pix(:,1:14,2) = 173;
 pix(:,1:14,3) = 160;
@@ -50,7 +51,7 @@ pix(:,485:end,1) = 187;
 pix(:,485:end,2) = 173;
 pix(:,485:end,3) = 160;
 
-%
+%for the vertical lines
 pix(1:14,:,1) = 187;
 pix(1:14,:,2) = 173;
 pix(1:14,:,3) = 160;
@@ -71,45 +72,41 @@ pix(485:end,:,1) = 187;
 pix(485:end,:,2) = 173;
 pix(485:end,:,3) = 160;
 % end of checkerboard pattern
-%1,1 15,15
-%1,2 136,15
-%1,3 256,15
-%1,4 376,15
-%2,1 15,136
-%2,2 136,136
-%2,3 256,136
-%2,4 376,136
-%3,1 15,256
-%3,2 136,256
-%3,3 256,256
-%3,4 376,256
-%4,1 15,376
-%4,2 136,376
-%4,3 256,376
-%4,4 376,376
 
 imshow(pix)
 x = 15;
-        y = 15;
+y = 15; 
+%i wrote this from the top left corners down basically it works fine
+%there's weird borders but like... eh it works 
 for ii = 1:4
     for jj = 1:4
-        
         if board(ii,jj) == 2
             pix(y:y+106,x:x+106,:) = two(:,:,:);
         elseif board(ii,jj) == 4
+            pix(y:y+106,x:x+106,:) = four(:,:,:);
         elseif board(ii,jj) == 8
+            pix(y:y+106,x:x+106,:) = eight(:,:,:);
         elseif board(ii,jj) == 16
+            pix(y:y+106,x:x+106,:) = sixteen(:,:,:);
         elseif board(ii,jj) == 32
+            pix(y:y+106,x:x+106,:) = threetwo(:,:,:);
         elseif board(ii,jj) == 64
+            pix(y:y+106,x:x+106,:) = sixfour(:,:,:);
         elseif board(ii,jj) == 128
+            pix(y:y+106,x:x+106,:) = onetwoeight(:,:,:);
         elseif board(ii,jj) == 256
+            pix(y:y+106,x:x+106,:) = twofivesix(:,:,:);
         elseif board(ii,jj) == 512
+            pix(y:y+106,x:x+106,:) = fiveonetwo(:,:,:);
         elseif board(ii,jj) == 1028
+            pix(y:y+106,x:x+106,:) = onethou(:,:,:);
         elseif board(ii,jj) == 2048
-        
+            pix(y:y+106,x:x+106,:) = holymoly(:,:,:);
         end
-x = x+121;
+        x = x+121;
     end
     x = 15;
-    y = y+121
+    y = y+121;
 end
+imshow(pix)
+imwr

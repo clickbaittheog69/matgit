@@ -109,3 +109,4 @@ for ii = 1:4
     y = y+121;
 end
 imshow(pix)
+imwrite(pix,'2048.png')
