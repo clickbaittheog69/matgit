@@ -6,7 +6,7 @@ score = 0;
 %lines 177 - end is for re-aligning the tiles to final game state
 
 
-% board = [4 0 0 0;16 4 2 2;32 16 4 4;64 32 8 4]; %test board
+% board = [4 4 4 4;4 4 4 4; 4 4 4 4;4 4 4 4]; %test board
 % fprintf('Original\n') %can comment as i included this for test purposes
 % disp(board)
 
@@ -172,7 +172,7 @@ if strcmp(direction, 'down')
         x = x+1;
     end
 end
-% % fprintf('New Unaligned Board\n')
+% fprintf('New Unaligned Board\n')
 % disp(board);
 %end of move board. added disp(board) for test purposes
 
