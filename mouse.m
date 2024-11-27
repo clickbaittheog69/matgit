@@ -1,5 +1,4 @@
-clc;
-clear;
+clc;clear;
 matrix = zeros(3,3);
 locstore = [1 1];
 matrix(locstore(1),locstore(2)) = 1;
@@ -21,7 +20,7 @@ for ii = 1:-2:-1
         c = c+1;
     end
 end
-prob = sym(1/c);
+prob = (1/c);
 for jj = 1:-2:-1
     if locstore(1) + jj >3 || locstore(1) +jj <=0
         continue
