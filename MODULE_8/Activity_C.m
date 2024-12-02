@@ -24,3 +24,4 @@ fprintf('Sorted values: ')
 for ii = 1:length(vec)
     fprintf('%d ', vec(ii))
 end
+svec = vec;
